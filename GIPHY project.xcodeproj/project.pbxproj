@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4F7A8FD35200908AF47EDF58 /* Pods_GIPHY_project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1837A573254A26CB921FE524 /* Pods_GIPHY_project.framework */; };
+		B87649362982F5E800B12C7C /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87649352982F5E800B12C7C /* ShareViewController.swift */; };
+		B87649382982FDE800B12C7C /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87649372982FDE800B12C7C /* ImageService.swift */; };
 		B882962D2982ADD900B724F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B882962C2982ADD900B724F8 /* AppDelegate.swift */; };
 		B882962F2982ADD900B724F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B882962E2982ADD900B724F8 /* SceneDelegate.swift */; };
 		B88296312982ADD900B724F8 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88296302982ADD900B724F8 /* TrendingViewController.swift */; };
@@ -23,6 +25,8 @@
 		1837A573254A26CB921FE524 /* Pods_GIPHY_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GIPHY_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2070D69B1FCF794BB9796830 /* Pods-GIPHY project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GIPHY project.release.xcconfig"; path = "Target Support Files/Pods-GIPHY project/Pods-GIPHY project.release.xcconfig"; sourceTree = "<group>"; };
 		7CB04641785A702053F95652 /* Pods-GIPHY project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GIPHY project.debug.xcconfig"; path = "Target Support Files/Pods-GIPHY project/Pods-GIPHY project.debug.xcconfig"; sourceTree = "<group>"; };
+		B87649352982F5E800B12C7C /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		B87649372982FDE800B12C7C /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		B88296292982ADD900B724F8 /* GIPHY project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GIPHY project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B882962C2982ADD900B724F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B882962E2982ADD900B724F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 				B88296412982B74900B724F8 /* Views */,
 				B88296402982B73D00B724F8 /* Models */,
 				B882964B2982C23400B724F8 /* Helpers.swift */,
+				B87649372982FDE800B12C7C /* ImageService.swift */,
 				B88296352982ADD900B724F8 /* Assets.xcassets */,
 				B88296372982ADD900B724F8 /* LaunchScreen.storyboard */,
 				B882963A2982ADD900B724F8 /* Info.plist */,
@@ -112,6 +117,7 @@
 			children = (
 				B88296302982ADD900B724F8 /* TrendingViewController.swift */,
 				B882964D2982C98C00B724F8 /* GifCollectionViewCell.swift */,
+				B87649352982F5E800B12C7C /* ShareViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -240,10 +246,12 @@
 			files = (
 				B88296312982ADD900B724F8 /* TrendingViewController.swift in Sources */,
 				B882964C2982C23400B724F8 /* Helpers.swift in Sources */,
+				B87649382982FDE800B12C7C /* ImageService.swift in Sources */,
 				B882962D2982ADD900B724F8 /* AppDelegate.swift in Sources */,
 				B882964E2982C98C00B724F8 /* GifCollectionViewCell.swift in Sources */,
 				B882964A2982C16C00B724F8 /* GifPresenter.swift in Sources */,
 				B88296482982BDDB00B724F8 /* GIF.swift in Sources */,
+				B87649362982F5E800B12C7C /* ShareViewController.swift in Sources */,
 				B882962F2982ADD900B724F8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

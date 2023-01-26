@@ -14,7 +14,6 @@ class TrendingViewController: UIViewController {
     private let gifCollectionView: UICollectionView = {
        
         let layout = UICollectionViewFlowLayout()
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.minimumLineSpacing = 3
         layout.minimumInteritemSpacing = 3
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -44,6 +43,7 @@ class TrendingViewController: UIViewController {
         
         view.addSubview(gifCollectionView)
         
+        gifCollectionView.backgroundColor = .clear
         gifCollectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: "GIFcell")
         
         gifCollectionView.snp.makeConstraints { make in
@@ -65,16 +65,31 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
             return UICollectionViewCell()
         }
         cell.configureCell(using: gifs[indexPath.row])
-        // cell is a bit roundedx§
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
-        if let height = gifs[indexPath.row].height?.toCGFloat(), let width = gifs[indexPath.row].width?.toCGFloat() {
+        let width = view.frame.width/2 - 10
+        
+        if let height = gifs[indexPath.row].height?.toCGFloat() {
             return CGSize(width: width, height: height)
         }
-        return CGSize(width: 200, height: 200)
+        else {
+            return CGSize(width: width, height: 200)
+        }
+    }
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let shareVC = ShareViewController()
+        shareVC.modalPresentationStyle = .overFullScreen
+        
+        shareVC.url = gifs[indexPath.row].url!
+        
+        present(shareVC, animated: true)
     }
 }
 

@@ -23,8 +23,10 @@ class GifCollectionViewCell: UICollectionViewCell {
         
         imageView.backgroundColor = .orange
         
-        imageView.sd_setImage(with: URL(string: gif.url!))
-        
+        DispatchQueue.main.async {
+            self.imageView.sd_setImage(with: URL(string: gif.url!))
+        }
+    
         imageView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
