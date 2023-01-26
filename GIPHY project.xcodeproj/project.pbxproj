@@ -3,24 +3,26 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F7A8FD35200908AF47EDF58 /* Pods_GIPHY_project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1837A573254A26CB921FE524 /* Pods_GIPHY_project.framework */; };
 		B882962D2982ADD900B724F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B882962C2982ADD900B724F8 /* AppDelegate.swift */; };
 		B882962F2982ADD900B724F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B882962E2982ADD900B724F8 /* SceneDelegate.swift */; };
 		B88296312982ADD900B724F8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88296302982ADD900B724F8 /* ViewController.swift */; };
-		B88296342982ADD900B724F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B88296322982ADD900B724F8 /* Main.storyboard */; };
 		B88296362982ADD900B724F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B88296352982ADD900B724F8 /* Assets.xcassets */; };
 		B88296392982ADD900B724F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B88296372982ADD900B724F8 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1837A573254A26CB921FE524 /* Pods_GIPHY_project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GIPHY_project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2070D69B1FCF794BB9796830 /* Pods-GIPHY project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GIPHY project.release.xcconfig"; path = "Target Support Files/Pods-GIPHY project/Pods-GIPHY project.release.xcconfig"; sourceTree = "<group>"; };
+		7CB04641785A702053F95652 /* Pods-GIPHY project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GIPHY project.debug.xcconfig"; path = "Target Support Files/Pods-GIPHY project/Pods-GIPHY project.debug.xcconfig"; sourceTree = "<group>"; };
 		B88296292982ADD900B724F8 /* GIPHY project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GIPHY project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B882962C2982ADD900B724F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B882962E2982ADD900B724F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B88296302982ADD900B724F8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B88296332982ADD900B724F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B88296352982ADD900B724F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B88296382982ADD900B724F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B882963A2982ADD900B724F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -31,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F7A8FD35200908AF47EDF58 /* Pods_GIPHY_project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1274FA62329E7FD6FB540774 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7CB04641785A702053F95652 /* Pods-GIPHY project.debug.xcconfig */,
+				2070D69B1FCF794BB9796830 /* Pods-GIPHY project.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		AAE0225DBE995E4E056330AD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1837A573254A26CB921FE524 /* Pods_GIPHY_project.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B88296202982ADD900B724F8 = {
 			isa = PBXGroup;
 			children = (
 				B882962B2982ADD900B724F8 /* GIPHY project */,
 				B882962A2982ADD900B724F8 /* Products */,
+				1274FA62329E7FD6FB540774 /* Pods */,
+				AAE0225DBE995E4E056330AD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,7 +81,6 @@
 				B882962C2982ADD900B724F8 /* AppDelegate.swift */,
 				B882962E2982ADD900B724F8 /* SceneDelegate.swift */,
 				B88296302982ADD900B724F8 /* ViewController.swift */,
-				B88296322982ADD900B724F8 /* Main.storyboard */,
 				B88296352982ADD900B724F8 /* Assets.xcassets */,
 				B88296372982ADD900B724F8 /* LaunchScreen.storyboard */,
 				B882963A2982ADD900B724F8 /* Info.plist */,
@@ -74,9 +95,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B882963D2982ADD900B724F8 /* Build configuration list for PBXNativeTarget "GIPHY project" */;
 			buildPhases = (
+				2F6E0E12A9396B4BE76D3A09 /* [CP] Check Pods Manifest.lock */,
 				B88296252982ADD900B724F8 /* Sources */,
 				B88296262982ADD900B724F8 /* Frameworks */,
 				B88296272982ADD900B724F8 /* Resources */,
+				9BB293D47E9CB9AF6555242E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -103,7 +126,7 @@
 				};
 			};
 			buildConfigurationList = B88296242982ADD900B724F8 /* Build configuration list for PBXProject "GIPHY project" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -127,11 +150,52 @@
 			files = (
 				B88296392982ADD900B724F8 /* LaunchScreen.storyboard in Resources */,
 				B88296362982ADD900B724F8 /* Assets.xcassets in Resources */,
-				B88296342982ADD900B724F8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2F6E0E12A9396B4BE76D3A09 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GIPHY project-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BB293D47E9CB9AF6555242E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GIPHY project/Pods-GIPHY project-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GIPHY project/Pods-GIPHY project-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GIPHY project/Pods-GIPHY project-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B88296252982ADD900B724F8 /* Sources */ = {
@@ -147,14 +211,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B88296322982ADD900B724F8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B88296332982ADD900B724F8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B88296372982ADD900B724F8 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -282,6 +338,7 @@
 		};
 		B882963E2982ADD900B724F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7CB04641785A702053F95652 /* Pods-GIPHY project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -292,7 +349,7 @@
 				INFOPLIST_FILE = "GIPHY project/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -310,6 +367,7 @@
 		};
 		B882963F2982ADD900B724F8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2070D69B1FCF794BB9796830 /* Pods-GIPHY project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -320,7 +378,7 @@
 				INFOPLIST_FILE = "GIPHY project/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
