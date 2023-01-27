@@ -46,6 +46,8 @@ class TrendingViewController: UIViewController {
         return .lightContent
     }
     
+    // MARK: - View configuration
+    
     private func configureGifCollectionView() {
         
         let layout = presenter.configureLayout()
@@ -87,6 +89,8 @@ class TrendingViewController: UIViewController {
         }
     }
     
+    // MARK: - Switching between tabs
+    
     @objc private func gifTabPress() {
         
         if currentTab != .gif {
@@ -113,6 +117,8 @@ class TrendingViewController: UIViewController {
         }
     }
 }
+
+// MARK: - Extensions
 
 extension TrendingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -153,6 +159,7 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
 }
 
 extension TrendingViewController: GifPresenterDelegate, StickerPresenterDelegate {
+    
     func stickerRetrieved(_ stickers: [Picture]) {
         self.stickers = stickers
         itemCollectionView.reloadData()

@@ -58,6 +58,8 @@ class SharePresenter {
         }
     }
     
+    // MARK: - Social media icon setup
+    
     func createSocialImageView(index: Int) -> UIImageView {
         
         let imageView = UIImageView()
@@ -82,6 +84,8 @@ class SharePresenter {
         return imageView
     }
     
+    // MARK: - M
+    
     func getAppURL(index: Int) -> String {
         
         var appURL = ""
@@ -100,7 +104,8 @@ class SharePresenter {
         return appURL
     }
     
-    // Custom alert fading animation
+    // MARK: - Custom alert fading animation
+    
     func animation(view: UIView) {
         
         UIView.animate(withDuration: 0.5) {

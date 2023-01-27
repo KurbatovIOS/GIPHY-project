@@ -29,6 +29,7 @@ class HomePresenter {
         case sticker
     }
     
+    // MARK: - Loading data from API
     
     func getTrendingGIFs() {
         
@@ -93,6 +94,8 @@ class HomePresenter {
         }
         dataTask.resume()
     }
+    
+    // MARK: - Collection view layout configuration
     
     func configureLayout() -> UICollectionViewLayout {
         
@@ -164,6 +167,8 @@ class HomePresenter {
         
         return layout
     }
+    
+    // MARK: - Basic tab configuration
     
     func createTabButton(title: String) -> UIButton {
         
