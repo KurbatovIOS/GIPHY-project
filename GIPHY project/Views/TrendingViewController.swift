@@ -11,14 +11,7 @@ import SDWebImage
 
 class TrendingViewController: UIViewController {
     
-    private let gifCollectionView: UICollectionView = {
-       
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 3
-        layout.minimumInteritemSpacing = 3
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        return view
-    }()
+    private var gifCollectionView: UICollectionView!
     
     private let presenter = GifPresenter()
     
@@ -26,20 +19,24 @@ class TrendingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        view.backgroundColor = .black
         
-        gifCollectionView.delegate = self
-        gifCollectionView.dataSource = self
+        view.backgroundColor = .black
         
         presenter.delegate = self
         
         presenter.getTrendingGIFs()
         
         configureGifCollectionView()
+        
+        gifCollectionView.delegate = self
+        gifCollectionView.dataSource = self
     }
     
     private func configureGifCollectionView() {
+        
+        let layout = presenter.configureLayout()
+        
+        gifCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         view.addSubview(gifCollectionView)
         
@@ -51,7 +48,6 @@ class TrendingViewController: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
         }
     }
-
 }
 
 extension TrendingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -68,18 +64,17 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
-        let width = view.frame.width/2 - 10
-        
-        if let height = gifs[indexPath.row].height?.toCGFloat() {
-            return CGSize(width: width, height: height)
-        }
-        else {
-            return CGSize(width: width, height: 200)
-        }
-    }
-    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        let width = view.frame.width/2 - 10
+//
+//        if let height = gifs[indexPath.row].height?.toCGFloat() {
+//            return CGSize(width: width, height: height)
+//        }
+//        else {
+//            return CGSize(width: width, height: 200)
+//        }
+//    }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

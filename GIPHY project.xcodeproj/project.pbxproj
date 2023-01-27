@@ -19,6 +19,7 @@
 		B882964A2982C16C00B724F8 /* GifPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88296492982C16C00B724F8 /* GifPresenter.swift */; };
 		B882964C2982C23400B724F8 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B882964B2982C23400B724F8 /* Helpers.swift */; };
 		B882964E2982C98C00B724F8 /* GifCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B882964D2982C98C00B724F8 /* GifCollectionViewCell.swift */; };
+		B8E326882983B978005F929A /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E326872983B978005F929A /* SharePresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		B88296492982C16C00B724F8 /* GifPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifPresenter.swift; sourceTree = "<group>"; };
 		B882964B2982C23400B724F8 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		B882964D2982C98C00B724F8 /* GifCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8E326872983B978005F929A /* SharePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				B88296492982C16C00B724F8 /* GifPresenter.swift */,
+				B8E326872983B978005F929A /* SharePresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8E326882983B978005F929A /* SharePresenter.swift in Sources */,
 				B88296312982ADD900B724F8 /* TrendingViewController.swift in Sources */,
 				B882964C2982C23400B724F8 /* Helpers.swift in Sources */,
 				B87649382982FDE800B12C7C /* ImageService.swift in Sources */,
