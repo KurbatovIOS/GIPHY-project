@@ -7,15 +7,23 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 protocol GifPresenterDelegate {
     
     func gifRetrieved(_ gifs: [Original])
 }
 
-class GifPresenter {
+protocol StickerPresenterDelegate {
     
-    var delegate: GifPresenterDelegate?
+    func stickerRetrieved(_ stickers: [Original])
+}
+
+class HomePresenter {
+    
+    var gifDelegate: GifPresenterDelegate?
+    var stickerDelegate: StickerPresenterDelegate?
+    
     
     func getTrendingGIFs() {
         
@@ -39,11 +47,43 @@ class GifPresenter {
                 }
                 
                 DispatchQueue.main.async {
-                    self.delegate?.gifRetrieved(gifs)
+                    self.gifDelegate?.gifRetrieved(gifs)
                 }
             }
             catch {
+                print("Decoding error")
+            }
+        }
+        dataTask.resume()
+    }
+    
+    func getTrendingStickers() {
+        
+        let urlString = "https://api.giphy.com/v1/stickers/trending?&api_key=\(Helpers.shared.apiKey)"
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        let session = URLSession.shared
+        
+        let dataTask = session.dataTask(with: url) { data, urlResponse, error in
+            
+            guard data != nil && error == nil else { return }
+            
+            do {
+                let data = try JSONDecoder().decode(Response.self, from: data!).data
                 
+                var stickers = [Original]()
+                
+                for sticker in data {
+                    stickers.append(sticker.images.original)
+                }
+                
+                DispatchQueue.main.async {
+                    self.stickerDelegate?.stickerRetrieved(stickers)
+                }
+            }
+            catch {
+                print("Decoding error")
             }
         }
         dataTask.resume()
@@ -120,5 +160,23 @@ class GifPresenter {
         let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
+    }
+    
+    func createTabButton(title: String) -> UIButton {
+        
+        let button = UIButton()
+        
+        button.configuration = .tinted()
+        button.configuration?.cornerStyle = .capsule
+        button.configuration?.title = title
+        button.configuration?.baseBackgroundColor = .clear
+        button.configuration?.baseForegroundColor = .white
+        
+        button.snp.makeConstraints { make in
+            make.height.equalTo(48)
+            make.width.equalTo(120)
+        }
+        
+        return button
     }
 }

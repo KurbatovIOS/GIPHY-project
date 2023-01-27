@@ -128,7 +128,7 @@ class ShareViewController: UIViewController {
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-15)
             make.height.equalTo(40)
-            make.bottom.equalTo(cancelButton.snp.top).offset(-5)
+            make.bottom.equalTo(cancelButton.snp.top).offset(-10)
         }
     }
     
@@ -144,7 +144,7 @@ class ShareViewController: UIViewController {
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-15)
             make.height.equalTo(40)
-            make.bottom.equalTo(copyGifButton.snp.top).offset(-5)
+            make.bottom.equalTo(copyGifButton.snp.top).offset(-10)
         }
     }
     
@@ -162,7 +162,7 @@ class ShareViewController: UIViewController {
         socialStack.distribution = .equalSpacing
         
         socialStack.snp.makeConstraints { make in
-            make.bottom.equalTo(copyLinkButton.snp.top).offset(-5)
+            make.bottom.equalTo(copyLinkButton.snp.top).offset(-10)
             make.leading.equalTo(view.snp.centerX)
             make.trailing.equalToSuperview().offset(-15)
             make.height.equalTo(40)
@@ -179,9 +179,9 @@ class ShareViewController: UIViewController {
         customAlertView.layer.cornerRadius = 10
         
         alertMessageLabel.text = "Copied!"
-        alertMessageLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        alertMessageLabel.numberOfLines = 0
+        alertMessageLabel.textColor = .white
         alertMessageLabel.textAlignment = .center
+        alertMessageLabel.font = UIFont.boldSystemFont(ofSize: 20)
         
         customAlertView.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.25)
@@ -213,6 +213,7 @@ class ShareViewController: UIViewController {
                 guard data != nil && error == nil else { return }
                 
                 UIPasteboard.general.setData(data!, forPasteboardType: "com.compuserve.gif")
+                
                 DispatchQueue.main.async {
                     self.presenter.animation(view: self.customAlertView)
                 }
