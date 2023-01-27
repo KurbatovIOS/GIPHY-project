@@ -19,7 +19,7 @@ class GifPresenter {
     
     func getTrendingGIFs() {
         
-        let urlString = "https://api.giphy.com/v1/gifs/trending?&api_key=\(Helpers().apiKey)"
+        let urlString = "https://api.giphy.com/v1/gifs/trending?&api_key=\(Helpers.shared.apiKey)"
         
         guard let url = URL(string: urlString) else { return }
         

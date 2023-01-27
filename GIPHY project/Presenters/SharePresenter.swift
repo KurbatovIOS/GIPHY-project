@@ -19,7 +19,7 @@ class SharePresenter {
         button.backgroundColor = color
         button.setTitle(title, for: .normal)
         button.tintColor = .white
-   
+        
         return button
     }
     
@@ -94,5 +94,16 @@ class SharePresenter {
         }
         
         return appURL
+    }
+    
+    func animation(view: UIView) {
+        
+        UIView.animate(withDuration: 0.5) {
+            view.alpha = 1
+        } completion: { _ in
+            UIView.animate(withDuration: 0.7) {
+                view.alpha = 0
+            }
+        }
     }
 }

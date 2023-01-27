@@ -14,6 +14,8 @@ class GifCollectionViewCell: UICollectionViewCell {
     
     private let imageView = SDAnimatedImageView()
     
+    private let colors: [UIColor] = [.cyan, .systemPurple]
+    
     func configureCell(using gif: Original) {
         
         addSubview(imageView)
@@ -21,7 +23,9 @@ class GifCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 5
         clipsToBounds = true
         
-        imageView.backgroundColor = .orange
+        let randomInt = Int.random(in: 0..<colors.count)
+        
+        imageView.backgroundColor = colors[randomInt]
         
         DispatchQueue.main.async {
             self.imageView.sd_setImage(with: URL(string: gif.url!))

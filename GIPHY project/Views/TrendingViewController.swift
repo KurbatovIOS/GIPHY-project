@@ -32,6 +32,10 @@ class TrendingViewController: UIViewController {
         gifCollectionView.dataSource = self
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     private func configureGifCollectionView() {
         
         let layout = presenter.configureLayout()
@@ -41,7 +45,7 @@ class TrendingViewController: UIViewController {
         view.addSubview(gifCollectionView)
         
         gifCollectionView.backgroundColor = .clear
-        gifCollectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: "GIFcell")
+        gifCollectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: Helpers.shared.cellIdentifier)
         
         gifCollectionView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
@@ -57,26 +61,13 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = gifCollectionView.dequeueReusableCell(withReuseIdentifier: "GIFcell", for: indexPath) as? GifCollectionViewCell else {
+        guard let cell = gifCollectionView.dequeueReusableCell(withReuseIdentifier: Helpers.shared.cellIdentifier, for: indexPath) as? GifCollectionViewCell else {
             return UICollectionViewCell()
         }
         cell.configureCell(using: gifs[indexPath.row])
         return cell
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        let width = view.frame.width/2 - 10
-//
-//        if let height = gifs[indexPath.row].height?.toCGFloat() {
-//            return CGSize(width: width, height: height)
-//        }
-//        else {
-//            return CGSize(width: width, height: 200)
-//        }
-//    }
-    
-    
+        
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let shareVC = ShareViewController()
@@ -92,18 +83,6 @@ extension TrendingViewController: GifPresenterDelegate {
     func gifRetrieved(_ gifs: [Original]) {
         self.gifs = gifs
         gifCollectionView.reloadData()
-    }
-}
-
-extension String {
-    
-    func toCGFloat() -> CGFloat? {
-        if let number = NumberFormatter().number(from: self) {
-            return CGFloat(truncating: number)
-        }
-        else {
-            return nil
-        }
     }
 }
 

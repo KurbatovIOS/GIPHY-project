@@ -24,6 +24,9 @@ class ShareViewController: UIViewController {
     
     private let presenter = SharePresenter()
     
+    private let customAlertView = UIView()
+    private let alertMessageLabel = UILabel()
+    
     var url: String!
     
     
@@ -41,6 +44,8 @@ class ShareViewController: UIViewController {
         configureCopyLinkButton()
         
         configureSocialStack()
+        
+        configureCustomAlertView()
     }
     
     // MARK: - View configuration
@@ -117,7 +122,7 @@ class ShareViewController: UIViewController {
         
         view.addSubview(copyGifButton)
         
-        copyGifButton.addTarget(self, action: #selector(copyLink), for: .touchUpInside)
+        copyGifButton.addTarget(self, action: #selector(copyGIF), for: .touchUpInside)
         
         copyGifButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(15)
@@ -164,11 +169,56 @@ class ShareViewController: UIViewController {
         }
     }
     
+    private func configureCustomAlertView() {
+        
+        view.addSubview(customAlertView)
+        customAlertView.addSubview(alertMessageLabel)
+        
+        customAlertView.alpha = 0
+        customAlertView.backgroundColor = .lightGray
+        customAlertView.layer.cornerRadius = 10
+        
+        alertMessageLabel.text = "Copied!"
+        alertMessageLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        alertMessageLabel.numberOfLines = 0
+        alertMessageLabel.textAlignment = .center
+        
+        customAlertView.snp.makeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.25)
+            make.height.equalTo(customAlertView.snp.width)
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        alertMessageLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(5)
+            make.trailing.equalToSuperview().offset(-5)
+            make.centerX.centerY.equalToSuperview()
+        }
+    }
+    
     // MARK: - Button actions
     
     @objc private func copyLink() {
         
         UIPasteboard.general.string = url
+        presenter.animation(view: customAlertView)
+    }
+    
+    @objc private func copyGIF() {
+        
+        if let gifUrl = URL(string: url) {
+            let session = URLSession.shared
+            let dataTask = session.dataTask(with: gifUrl) { (data, response, error) in
+                
+                guard data != nil && error == nil else { return }
+                
+                UIPasteboard.general.setData(data!, forPasteboardType: "com.compuserve.gif")
+                DispatchQueue.main.async {
+                    self.presenter.animation(view: self.customAlertView)
+                }
+            }
+            dataTask.resume()
+        }
     }
     
     @objc private func dismissAction() {
@@ -188,7 +238,7 @@ class ShareViewController: UIViewController {
         let appURL = presenter.getAppURL(index: socialView.tag)
         
         let queryCharSet = NSCharacterSet.urlQueryAllowed
-
+        
         if let message = url.addingPercentEncoding(withAllowedCharacters: queryCharSet) {
             if let finalURL = URL(string: appURL + message) {
                 if UIApplication.shared.canOpenURL(finalURL) {
