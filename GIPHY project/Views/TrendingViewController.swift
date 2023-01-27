@@ -69,7 +69,7 @@ class TrendingViewController: UIViewController {
         stickerTabButton = presenter.createTabButton(title: "Stickers")
         
         gifTabButton.configuration?.baseBackgroundColor = .purple
-    
+        
         gifTabButton.addTarget(self, action: #selector(gifTabPress), for: .touchUpInside)
         stickerTabButton.addTarget(self, action: #selector(stickerTabPress), for: .touchUpInside)
         
@@ -134,7 +134,7 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         
         return cell
     }
-        
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let url = currentTab == .gif ? gifs[indexPath.row].url : stickers[indexPath.row].url
@@ -163,4 +163,3 @@ extension TrendingViewController: GifPresenterDelegate, StickerPresenterDelegate
         itemCollectionView.reloadData()
     }
 }
-

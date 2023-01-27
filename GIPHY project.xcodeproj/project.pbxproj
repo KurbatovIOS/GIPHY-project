@@ -14,7 +14,7 @@
 		B88296312982ADD900B724F8 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88296302982ADD900B724F8 /* TrendingViewController.swift */; };
 		B88296362982ADD900B724F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B88296352982ADD900B724F8 /* Assets.xcassets */; };
 		B88296392982ADD900B724F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B88296372982ADD900B724F8 /* LaunchScreen.storyboard */; };
-		B88296482982BDDB00B724F8 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88296472982BDDB00B724F8 /* Picture.swift */; };
+		B88296482982BDDB00B724F8 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88296472982BDDB00B724F8 /* DataModel.swift */; };
 		B882964A2982C16C00B724F8 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88296492982C16C00B724F8 /* HomePresenter.swift */; };
 		B882964C2982C23400B724F8 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B882964B2982C23400B724F8 /* Helpers.swift */; };
 		B882964E2982C98C00B724F8 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B882964D2982C98C00B724F8 /* ItemCollectionViewCell.swift */; };
@@ -33,7 +33,7 @@
 		B88296352982ADD900B724F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B88296382982ADD900B724F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B882963A2982ADD900B724F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B88296472982BDDB00B724F8 /* Picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
+		B88296472982BDDB00B724F8 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		B88296492982C16C00B724F8 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		B882964B2982C23400B724F8 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		B882964D2982C98C00B724F8 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 		B88296402982B73D00B724F8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B88296472982BDDB00B724F8 /* Picture.swift */,
+				B88296472982BDDB00B724F8 /* DataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -250,7 +250,7 @@
 				B882962D2982ADD900B724F8 /* AppDelegate.swift in Sources */,
 				B882964E2982C98C00B724F8 /* ItemCollectionViewCell.swift in Sources */,
 				B882964A2982C16C00B724F8 /* HomePresenter.swift in Sources */,
-				B88296482982BDDB00B724F8 /* Picture.swift in Sources */,
+				B88296482982BDDB00B724F8 /* DataModel.swift in Sources */,
 				B87649362982F5E800B12C7C /* ShareViewController.swift in Sources */,
 				B882962F2982ADD900B724F8 /* SceneDelegate.swift in Sources */,
 			);
@@ -395,11 +395,11 @@
 				DEVELOPMENT_TEAM = G77J479352;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "GIPHY project/Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to save photo in your photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -424,11 +424,11 @@
 				DEVELOPMENT_TEAM = G77J479352;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "GIPHY project/Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Please allow access to save photo in your photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

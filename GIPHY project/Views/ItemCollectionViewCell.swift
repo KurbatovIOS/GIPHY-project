@@ -30,7 +30,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
         DispatchQueue.main.async {
             self.imageView.sd_setImage(with: URL(string: item.url!))
         }
-    
+        
         imageView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
