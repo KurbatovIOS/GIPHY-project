@@ -17,9 +17,10 @@ class TrendingViewController: UIViewController {
     private var stickerTabButton: UIButton!
     
     private let presenter = HomePresenter()
+    private let configurator = UIConfigurator()
     
-    private var gifs = [Picture]()
-    private var stickers = [Picture]()
+    private var gifs = [Images]()
+    private var stickers = [Images]()
     
     private var currentTab = HomePresenter.CurrentTab.gif
     
@@ -33,8 +34,8 @@ class TrendingViewController: UIViewController {
         
         configureTabs()
         
-        presenter.getTrendingGIFs()
-        presenter.getTrendingStickers()
+        presenter.getTrendingData(isSticker: false)
+        presenter.getTrendingData(isSticker: true)
         
         configureGifCollectionView()
         
@@ -46,11 +47,12 @@ class TrendingViewController: UIViewController {
         return .lightContent
     }
     
+    
     // MARK: - View configuration
     
     private func configureGifCollectionView() {
         
-        let layout = presenter.configureLayout()
+        let layout = configurator.configureLayout()
         
         itemCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
@@ -67,8 +69,8 @@ class TrendingViewController: UIViewController {
     
     private func configureTabs() {
         
-        gifTabButton = presenter.createTabButton(title: "GIFs")
-        stickerTabButton = presenter.createTabButton(title: "Stickers")
+        gifTabButton = configurator.createTabButton(title: "GIFs")
+        stickerTabButton = configurator.createTabButton(title: "Stickers")
         
         gifTabButton.configuration?.baseBackgroundColor = .purple
         
@@ -132,10 +134,10 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         }
         
         if currentTab == .gif {
-            cell.configureCell(using: gifs[indexPath.row], isSticker: false)
+            cell.configureCell(using: gifs[indexPath.row].downsized, isSticker: false)
         }
         else {
-            cell.configureCell(using: stickers[indexPath.row], isSticker: true)
+            cell.configureCell(using: stickers[indexPath.row].downsized, isSticker: true)
         }
         
         return cell
@@ -143,7 +145,7 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let url = currentTab == .gif ? gifs[indexPath.row].url : stickers[indexPath.row].url
+        let url = currentTab == .gif ? gifs[indexPath.row].original.url : stickers[indexPath.row].original.url
         
         if url != nil && url != "" {
             
@@ -160,12 +162,12 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension TrendingViewController: GifPresenterDelegate, StickerPresenterDelegate {
     
-    func stickerRetrieved(_ stickers: [Picture]) {
+    func stickerRetrieved(_ stickers: [Images]) {
         self.stickers = stickers
         itemCollectionView.reloadData()
     }
     
-    func gifRetrieved(_ gifs: [Picture]) {
+    func gifRetrieved(_ gifs: [Images]) {
         self.gifs = gifs
         itemCollectionView.reloadData()
     }

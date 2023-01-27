@@ -23,6 +23,7 @@ class ShareViewController: UIViewController {
     private let socialStack = UIStackView()
     
     private let presenter = SharePresenter()
+    private let configurator = UIConfigurator()
     
     private let customAlertView = UIView()
     private let alertMessageLabel = UILabel()
@@ -106,7 +107,7 @@ class ShareViewController: UIViewController {
     
     private func configureCancelButton() {
         
-        cancelButton = presenter.createCopyButton(color: .black, title: "Cancel")
+        cancelButton = configurator.createCopyButton(color: .black, title: "Cancel")
         
         view.addSubview(cancelButton)
         
@@ -124,7 +125,7 @@ class ShareViewController: UIViewController {
         
         let type = currentTab == .gif ? "GIF" : "Sticker"
         
-        copyItemButton = presenter.createCopyButton(color: .darkGray, title: "Copy \(type)")
+        copyItemButton = configurator.createCopyButton(color: .darkGray, title: "Copy \(type)")
         
         view.addSubview(copyItemButton)
         
@@ -142,7 +143,7 @@ class ShareViewController: UIViewController {
         
         let type = currentTab == .gif ? "GIF" : "Sticker"
         
-        copyLinkButton = presenter.createCopyButton(color: .blue, title: "Copy \(type) Link")
+        copyLinkButton = configurator.createCopyButton(color: .blue, title: "Copy \(type) Link")
         
         view.addSubview(copyLinkButton)
         
@@ -161,17 +162,21 @@ class ShareViewController: UIViewController {
         view.addSubview(socialStack)
         
         for i in 0..<3 {
-            let socialImageView = presenter.createSocialImageView(index: i)
+            let socialImageView = configurator.createSocialImageView(index: i)
             socialImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sendMessage)))
             socialStack.addArrangedSubview(socialImageView)
+            
+            socialImageView.snp.makeConstraints { make in
+                make.width.equalTo(40)
+            }
         }
+        
         socialStack.axis = .horizontal
         socialStack.alignment = .trailing
-        socialStack.distribution = .equalSpacing
+        socialStack.spacing = 10
         
         socialStack.snp.makeConstraints { make in
             make.bottom.equalTo(copyLinkButton.snp.top).offset(-10)
-            make.leading.equalTo(view.snp.centerX)
             make.trailing.equalToSuperview().offset(-15)
             make.height.equalTo(40)
         }
@@ -209,7 +214,7 @@ class ShareViewController: UIViewController {
     @objc private func copyLink() {
         
         UIPasteboard.general.string = url
-        presenter.animation(view: customAlertView)
+        configurator.animation(view: customAlertView)
     }
     
     @objc private func copyGIF() {
@@ -223,7 +228,7 @@ class ShareViewController: UIViewController {
                 UIPasteboard.general.setData(data!, forPasteboardType: "com.compuserve.gif")
                 
                 DispatchQueue.main.async {
-                    self.presenter.animation(view: self.customAlertView)
+                    self.configurator.animation(view: self.customAlertView)
                 }
             }
             dataTask.resume()
@@ -244,7 +249,7 @@ class ShareViewController: UIViewController {
         
         let socialView = tapGestureRecognizer.view as! UIImageView
         
-        let appURL = presenter.getAppURL(index: socialView.tag)
+        let appURL = configurator.getAppURL(index: socialView.tag)
         
         let queryCharSet = NSCharacterSet.urlQueryAllowed
         

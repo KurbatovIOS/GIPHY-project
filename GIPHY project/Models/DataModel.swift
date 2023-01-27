@@ -19,10 +19,18 @@ struct Item: Decodable {
 
 struct Images: Decodable {
     
-    let original: Picture
+    let original: Original
+    let downsized: Downsized
 }
 
-struct Picture: Decodable {
+struct Original: Decodable {
+    
+    let height: String?
+    let width: String?
+    let url: String?
+}
+
+struct Downsized : Decodable {
     
     let height: String?
     let width: String?

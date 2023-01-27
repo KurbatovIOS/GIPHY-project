@@ -18,6 +18,7 @@
 		B882964A2982C16C00B724F8 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88296492982C16C00B724F8 /* HomePresenter.swift */; };
 		B882964C2982C23400B724F8 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B882964B2982C23400B724F8 /* Helpers.swift */; };
 		B882964E2982C98C00B724F8 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B882964D2982C98C00B724F8 /* ItemCollectionViewCell.swift */; };
+		B8A6BACA298488A500E4FC7B /* UIConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A6BAC9298488A500E4FC7B /* UIConfigurator.swift */; };
 		B8E326882983B978005F929A /* SharePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E326872983B978005F929A /* SharePresenter.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		B88296492982C16C00B724F8 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		B882964B2982C23400B724F8 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		B882964D2982C98C00B724F8 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		B8A6BAC9298488A500E4FC7B /* UIConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConfigurator.swift; sourceTree = "<group>"; };
 		B8E326872983B978005F929A /* SharePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,7 +97,7 @@
 				B88296422982B74D00B724F8 /* Presenters */,
 				B88296412982B74900B724F8 /* Views */,
 				B88296402982B73D00B724F8 /* Models */,
-				B882964B2982C23400B724F8 /* Helpers.swift */,
+				B8A6BAC82984888300E4FC7B /* Helpers */,
 				B88296352982ADD900B724F8 /* Assets.xcassets */,
 				B88296372982ADD900B724F8 /* LaunchScreen.storyboard */,
 				B882963A2982ADD900B724F8 /* Info.plist */,
@@ -128,6 +130,15 @@
 				B8E326872983B978005F929A /* SharePresenter.swift */,
 			);
 			path = Presenters;
+			sourceTree = "<group>";
+		};
+		B8A6BAC82984888300E4FC7B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B882964B2982C23400B724F8 /* Helpers.swift */,
+				B8A6BAC9298488A500E4FC7B /* UIConfigurator.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,6 +259,7 @@
 				B88296312982ADD900B724F8 /* TrendingViewController.swift in Sources */,
 				B882964C2982C23400B724F8 /* Helpers.swift in Sources */,
 				B882962D2982ADD900B724F8 /* AppDelegate.swift in Sources */,
+				B8A6BACA298488A500E4FC7B /* UIConfigurator.swift in Sources */,
 				B882964E2982C98C00B724F8 /* ItemCollectionViewCell.swift in Sources */,
 				B882964A2982C16C00B724F8 /* HomePresenter.swift in Sources */,
 				B88296482982BDDB00B724F8 /* DataModel.swift in Sources */,

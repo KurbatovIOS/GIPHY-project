@@ -9,20 +9,20 @@ import Foundation
 import UIKit
 import SnapKit
 
-protocol GifPresenterDelegate {
+protocol GifPresenterDelegate: AnyObject {
     
-    func gifRetrieved(_ gifs: [Picture])
+    func gifRetrieved(_ gifs: [Images])
 }
 
-protocol StickerPresenterDelegate {
+protocol StickerPresenterDelegate: AnyObject {
     
-    func stickerRetrieved(_ stickers: [Picture])
+    func stickerRetrieved(_ stickers: [Images])
 }
 
 class HomePresenter {
     
-    var gifDelegate: GifPresenterDelegate?
-    var stickerDelegate: StickerPresenterDelegate?
+    weak var gifDelegate: GifPresenterDelegate?
+    weak var stickerDelegate: StickerPresenterDelegate?
     
     enum CurrentTab {
         case gif
@@ -31,41 +31,11 @@ class HomePresenter {
     
     // MARK: - Loading data from API
     
-    func getTrendingGIFs() {
+    func getTrendingData(isSticker: Bool) {
         
-        let urlString = "https://api.giphy.com/v1/gifs/trending?&api_key=\(Helpers.shared.apiKey)"
+        let section = isSticker ? "stickers" : "gifs"
         
-        guard let url = URL(string: urlString) else { return }
-        
-        let session = URLSession.shared
-        
-        let dataTask = session.dataTask(with: url) { data, urlResponse, error in
-            
-            guard data != nil && error == nil else { return }
-            
-            do {
-                let data = try JSONDecoder().decode(Response.self, from: data!).data
-                
-                var gifs = [Picture]()
-                
-                for gif in data {
-                    gifs.append(gif.images.original)
-                }
-                
-                DispatchQueue.main.async {
-                    self.gifDelegate?.gifRetrieved(gifs)
-                }
-            }
-            catch {
-                print("Decoding error")
-            }
-        }
-        dataTask.resume()
-    }
-    
-    func getTrendingStickers() {
-        
-        let urlString = "https://api.giphy.com/v1/stickers/trending?&api_key=\(Helpers.shared.apiKey)"
+        let urlString = "https://api.giphy.com/v1/\(section)/trending?&api_key=\(Helpers.shared.apiKey)"
         
         guard let url = URL(string: urlString) else { return }
         
@@ -78,14 +48,20 @@ class HomePresenter {
             do {
                 let data = try JSONDecoder().decode(Response.self, from: data!).data
                 
-                var stickers = [Picture]()
+                var items = [Images]()
                 
-                for sticker in data {
-                    stickers.append(sticker.images.original)
+                for item in data {
+                    items.append(item.images)
                 }
                 
                 DispatchQueue.main.async {
-                    self.stickerDelegate?.stickerRetrieved(stickers)
+                    
+                    if isSticker {
+                        self.stickerDelegate?.stickerRetrieved(items)
+                    }
+                    else {
+                        self.gifDelegate?.gifRetrieved(items)
+                    }
                 }
             }
             catch {
@@ -93,98 +69,5 @@ class HomePresenter {
             }
         }
         dataTask.resume()
-    }
-    
-    // MARK: - Collection view layout configuration
-    
-    func configureLayout() -> UICollectionViewLayout {
-        
-        let fullPhotoItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalWidth(2/3)))
-        
-        fullPhotoItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
-        
-        let mainItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(2/3), heightDimension: .fractionalHeight(1.0)))
-        
-        mainItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
-        
-        let pairItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(0.5)))
-        
-        pairItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
-        
-        let trailingGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1/3),
-                heightDimension: .fractionalHeight(1.0)),
-            repeatingSubitem: pairItem,
-            count: 2)
-        
-        let mainWithPairGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalWidth(4/9)),
-            subitems: [mainItem, trailingGroup])
-        
-        let tripletItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1/3),
-                heightDimension: .fractionalHeight(1.0)))
-        
-        tripletItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
-        
-        let tripletGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalWidth(2/9)),
-            subitems: [tripletItem, tripletItem, tripletItem])
-        
-        let mainWithPairReversedGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalWidth(4/9)),
-            subitems: [trailingGroup, mainItem])
-        
-        let nestedGroup = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalWidth(16/9)),
-            subitems: [
-                fullPhotoItem,
-                mainWithPairGroup,
-                tripletGroup,
-                mainWithPairReversedGroup
-            ]
-        )
-        
-        let section = NSCollectionLayoutSection(group: nestedGroup)
-        
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        
-        return layout
-    }
-    
-    // MARK: - Basic tab configuration
-    
-    func createTabButton(title: String) -> UIButton {
-        
-        let button = UIButton()
-        
-        button.configuration = .filled()
-        button.configuration?.cornerStyle = .capsule
-        button.configuration?.title = title
-        button.configuration?.baseBackgroundColor = .clear
-        button.configuration?.baseForegroundColor = .white
-        
-        button.snp.makeConstraints { make in
-            make.height.equalTo(48)
-            make.width.equalTo(120)
-        }
-        
-        return button
     }
 }
