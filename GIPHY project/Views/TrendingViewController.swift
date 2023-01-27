@@ -11,15 +11,17 @@ import SDWebImage
 
 class TrendingViewController: UIViewController {
     
-    private var gifCollectionView: UICollectionView!
+    private var itemCollectionView: UICollectionView!
     
     private var gifTabButton: UIButton!
     private var stickerTabButton: UIButton!
     
     private let presenter = HomePresenter()
     
-    private var gifs = [Original]()
-    private var stickers = [Original]()
+    private var gifs = [Picture]()
+    private var stickers = [Picture]()
+    
+    private var currentTab = HomePresenter.CurrentTab.gif
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +38,8 @@ class TrendingViewController: UIViewController {
         
         configureGifCollectionView()
         
-        gifCollectionView.delegate = self
-        gifCollectionView.dataSource = self
+        itemCollectionView.delegate = self
+        itemCollectionView.dataSource = self
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -48,14 +50,14 @@ class TrendingViewController: UIViewController {
         
         let layout = presenter.configureLayout()
         
-        gifCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        itemCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
-        view.addSubview(gifCollectionView)
+        view.addSubview(itemCollectionView)
         
-        gifCollectionView.backgroundColor = .clear
-        gifCollectionView.register(GifCollectionViewCell.self, forCellWithReuseIdentifier: Helpers.shared.cellIdentifier)
+        itemCollectionView.backgroundColor = .clear
+        itemCollectionView.register(ItemCollectionViewCell.self, forCellWithReuseIdentifier: Helpers.shared.cellIdentifier)
         
-        gifCollectionView.snp.makeConstraints { make in
+        itemCollectionView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(stickerTabButton.snp.bottom).offset(5)
         }
@@ -66,7 +68,7 @@ class TrendingViewController: UIViewController {
         gifTabButton = presenter.createTabButton(title: "GIFs")
         stickerTabButton = presenter.createTabButton(title: "Stickers")
         
-        gifTabButton.configuration?.baseBackgroundColor = .systemPurple
+        gifTabButton.configuration?.baseBackgroundColor = .purple
     
         gifTabButton.addTarget(self, action: #selector(gifTabPress), for: .touchUpInside)
         stickerTabButton.addTarget(self, action: #selector(stickerTabPress), for: .touchUpInside)
@@ -87,42 +89,54 @@ class TrendingViewController: UIViewController {
     
     @objc private func gifTabPress() {
         
-        stickerTabButton.configuration?.baseBackgroundColor = .clear
-        gifTabButton.configuration?.baseBackgroundColor = .systemPurple
+        if currentTab != .gif {
+            
+            stickerTabButton.configuration?.baseBackgroundColor = .clear
+            gifTabButton.configuration?.baseBackgroundColor = .purple
+            
+            currentTab = .gif
+            itemCollectionView.reloadData()
+        }
     }
     
     @objc private func stickerTabPress() {
         
-        gifTabButton.configuration?.baseBackgroundColor = .clear
-        stickerTabButton.configuration?.baseBackgroundColor = .systemPurple
+        if currentTab != .sticker {
+            
+            gifTabButton.configuration?.baseBackgroundColor = .clear
+            stickerTabButton.configuration?.baseBackgroundColor = .purple
+            
+            currentTab = .sticker
+            itemCollectionView.reloadData()
+        }
     }
-    
 }
 
 extension TrendingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return gifs.count
-        return stickers.count
+        return currentTab == .gif ? gifs.count : stickers.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = gifCollectionView.dequeueReusableCell(withReuseIdentifier: Helpers.shared.cellIdentifier, for: indexPath) as? GifCollectionViewCell else {
+        guard let cell = itemCollectionView.dequeueReusableCell(withReuseIdentifier: Helpers.shared.cellIdentifier, for: indexPath) as? ItemCollectionViewCell else {
             return UICollectionViewCell()
         }
-        //cell.configureCell(using: gifs[indexPath.row])
-        cell.configureCell(using: stickers[indexPath.row], isSticker: true)
+        currentTab == .gif ? cell.configureCell(using: gifs[indexPath.row], isSticker: false) :  cell.configureCell(using: stickers[indexPath.row], isSticker: true)
+        
         return cell
     }
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        //if let url = gifs[indexPath.row].url {
+        let url = currentTab == .gif ? gifs[indexPath.row].url : stickers[indexPath.row].url
         
-        if let url = stickers[indexPath.row].url {
+        if url != nil && url != "" {
+            
             let shareVC = ShareViewController()
             shareVC.modalPresentationStyle = .overFullScreen
             
+            shareVC.currentTab = currentTab
             shareVC.url = url
             
             present(shareVC, animated: true)
@@ -131,14 +145,14 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
 }
 
 extension TrendingViewController: GifPresenterDelegate, StickerPresenterDelegate {
-    func stickerRetrieved(_ stickers: [Original]) {
+    func stickerRetrieved(_ stickers: [Picture]) {
         self.stickers = stickers
-        gifCollectionView.reloadData()
+        itemCollectionView.reloadData()
     }
     
-    func gifRetrieved(_ gifs: [Original]) {
+    func gifRetrieved(_ gifs: [Picture]) {
         self.gifs = gifs
-        gifCollectionView.reloadData()
+        itemCollectionView.reloadData()
     }
 }
 

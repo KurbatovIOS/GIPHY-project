@@ -9,22 +9,22 @@ import Foundation
 
 struct Response: Decodable {
     
-    let data: [GIF]
+    let data: [Item]
 }
 
-struct GIF: Decodable {
+struct Item: Decodable {
     
     let images: Images
 }
 
 struct Images: Decodable {
     
-    let original: Original
+    let original: Picture
 }
 
-struct Original: Decodable {
+struct Picture: Decodable {
+    
     let height: String?
     let width: String?
     let url: String?
-    
 }

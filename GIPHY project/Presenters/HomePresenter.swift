@@ -11,18 +11,23 @@ import SnapKit
 
 protocol GifPresenterDelegate {
     
-    func gifRetrieved(_ gifs: [Original])
+    func gifRetrieved(_ gifs: [Picture])
 }
 
 protocol StickerPresenterDelegate {
     
-    func stickerRetrieved(_ stickers: [Original])
+    func stickerRetrieved(_ stickers: [Picture])
 }
 
 class HomePresenter {
     
     var gifDelegate: GifPresenterDelegate?
     var stickerDelegate: StickerPresenterDelegate?
+    
+    enum CurrentTab {
+        case gif
+        case sticker
+    }
     
     
     func getTrendingGIFs() {
@@ -40,7 +45,7 @@ class HomePresenter {
             do {
                 let data = try JSONDecoder().decode(Response.self, from: data!).data
                 
-                var gifs = [Original]()
+                var gifs = [Picture]()
                 
                 for gif in data {
                     gifs.append(gif.images.original)
@@ -72,7 +77,7 @@ class HomePresenter {
             do {
                 let data = try JSONDecoder().decode(Response.self, from: data!).data
                 
-                var stickers = [Original]()
+                var stickers = [Picture]()
                 
                 for sticker in data {
                     stickers.append(sticker.images.original)
@@ -166,7 +171,7 @@ class HomePresenter {
         
         let button = UIButton()
         
-        button.configuration = .tinted()
+        button.configuration = .filled()
         button.configuration?.cornerStyle = .capsule
         button.configuration?.title = title
         button.configuration?.baseBackgroundColor = .clear

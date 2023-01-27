@@ -12,7 +12,7 @@ class Helpers {
     static let shared = Helpers()
     
     let apiKey = "98559pKOhIQNByFgR90WhTcddLlDXt9i"
-    let cellIdentifier = "GIFcell"
+    let cellIdentifier = "itemCell"
 }
 
 extension String {

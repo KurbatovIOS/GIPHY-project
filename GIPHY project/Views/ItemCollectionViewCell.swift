@@ -8,15 +8,15 @@
 import UIKit
 import SDWebImage
 
-class GifCollectionViewCell: UICollectionViewCell {
+class ItemCollectionViewCell: UICollectionViewCell {
     
-    private let gifImageView = UIImageView()
+    private let itemImageView = UIImageView()
     
     private let imageView = SDAnimatedImageView()
     
     private let colors: [UIColor] = [.cyan, .systemPurple]
     
-    func configureCell(using gif: Original, isSticker: Bool) {
+    func configureCell(using item: Picture, isSticker: Bool) {
         
         addSubview(imageView)
         
@@ -28,7 +28,7 @@ class GifCollectionViewCell: UICollectionViewCell {
         imageView.backgroundColor = isSticker ? .clear : colors[randomInt]
         
         DispatchQueue.main.async {
-            self.imageView.sd_setImage(with: URL(string: gif.url!))
+            self.imageView.sd_setImage(with: URL(string: item.url!))
         }
     
         imageView.snp.makeConstraints { make in

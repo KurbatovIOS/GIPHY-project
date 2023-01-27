@@ -15,10 +15,10 @@ class ShareViewController: UIViewController {
     private let shareButton = UIButton()
     
     private var copyLinkButton: UIButton!
-    private var copyGifButton: UIButton!
+    private var copyItemButton: UIButton!
     private var cancelButton: UIButton!
     
-    private let gifImageView = SDAnimatedImageView()
+    private let itemImageView = SDAnimatedImageView()
     
     private let socialStack = UIStackView()
     
@@ -26,6 +26,8 @@ class ShareViewController: UIViewController {
     
     private let customAlertView = UIView()
     private let alertMessageLabel = UILabel()
+    
+    var currentTab: HomePresenter.CurrentTab!
     
     var url: String!
     
@@ -37,7 +39,7 @@ class ShareViewController: UIViewController {
         
         configureDismissButton()
         configureShareButton()
-        configureGIF()
+        configureItem()
         
         configureCancelButton()
         configureCopyGifButton()
@@ -80,19 +82,19 @@ class ShareViewController: UIViewController {
         }
     }
     
-    private func configureGIF() {
+    private func configureItem() {
         
-        view.addSubview(gifImageView)
+        view.addSubview(itemImageView)
         
-        gifImageView.backgroundColor = .orange
+        itemImageView.backgroundColor = currentTab == .gif ? .cyan : .clear
         
         if url != nil {
             DispatchQueue.main.async {
-                self.gifImageView.sd_setImage(with: URL(string: self.url))
+                self.itemImageView.sd_setImage(with: URL(string: self.url))
             }
         }
         
-        gifImageView.snp.makeConstraints { make in
+        itemImageView.snp.makeConstraints { make in
             make.top.equalTo(dismissButton.snp.bottom).offset(50)
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-15)
@@ -118,13 +120,15 @@ class ShareViewController: UIViewController {
     
     private func configureCopyGifButton(){
         
-        copyGifButton = presenter.createCopyButton(color: .darkGray, title: "Copy GIF")
+        let type = currentTab == .gif ? "GIF" : "Sticker"
         
-        view.addSubview(copyGifButton)
+        copyItemButton = presenter.createCopyButton(color: .darkGray, title: "Copy \(type)")
         
-        copyGifButton.addTarget(self, action: #selector(copyGIF), for: .touchUpInside)
+        view.addSubview(copyItemButton)
         
-        copyGifButton.snp.makeConstraints { make in
+        copyItemButton.addTarget(self, action: #selector(copyGIF), for: .touchUpInside)
+        
+        copyItemButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-15)
             make.height.equalTo(40)
@@ -134,7 +138,9 @@ class ShareViewController: UIViewController {
     
     private func configureCopyLinkButton(){
         
-        copyLinkButton = presenter.createCopyButton(color: .blue, title: "Copy GIF Link")
+        let type = currentTab == .gif ? "GIF" : "Sticker"
+        
+        copyLinkButton = presenter.createCopyButton(color: .blue, title: "Copy \(type) Link")
         
         view.addSubview(copyLinkButton)
         
@@ -144,7 +150,7 @@ class ShareViewController: UIViewController {
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-15)
             make.height.equalTo(40)
-            make.bottom.equalTo(copyGifButton.snp.top).offset(-10)
+            make.bottom.equalTo(copyItemButton.snp.top).offset(-10)
         }
     }
     
@@ -229,7 +235,7 @@ class ShareViewController: UIViewController {
     
     @objc private func shareButtonTap() {
         
-        presenter.saveGIF(urlString: url, sender: self)
+        presenter.saveItem(urlString: url, sender: self)
     }
     
     @objc private func sendMessage(tapGestureRecognizer: UITapGestureRecognizer) {

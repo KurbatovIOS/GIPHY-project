@@ -23,11 +23,11 @@ class SharePresenter {
         return button
     }
     
-    func saveGIF(urlString: String, sender: UIViewController) {
+    func saveItem(urlString: String, sender: UIViewController) {
         
-        if let gifUrl = URL(string: urlString) {
+        if let itemUrl = URL(string: urlString) {
             let session = URLSession.shared
-            let dataTask = session.dataTask(with: gifUrl) { (data, response, error) in
+            let dataTask = session.dataTask(with: itemUrl) { (data, response, error) in
                 
                 guard data != nil && error == nil else {
                     DispatchQueue.main.async {
@@ -45,7 +45,7 @@ class SharePresenter {
                 })
                 
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Saved!", message: "The GIF has been saved to your photos", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Saved!", message: "GIF has been saved to your photos", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default))
                     sender.present(alert, animated: true)
                 }
