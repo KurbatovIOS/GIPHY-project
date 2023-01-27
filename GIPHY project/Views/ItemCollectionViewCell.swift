@@ -25,7 +25,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
         
         let randomInt = Int.random(in: 0..<colors.count)
         
-        imageView.backgroundColor = isSticker ? .clear : colors[randomInt]
+        backgroundColor = isSticker ? .clear : colors[randomInt]
         
         DispatchQueue.main.async {
             self.imageView.sd_setImage(with: URL(string: item.url!))

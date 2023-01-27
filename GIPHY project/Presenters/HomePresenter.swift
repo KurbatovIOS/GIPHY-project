@@ -107,7 +107,6 @@ class HomePresenter {
 
         mainItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
 
-        // 2
         let pairItem = NSCollectionLayoutItem(
           layoutSize: NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -121,8 +120,7 @@ class HomePresenter {
             heightDimension: .fractionalHeight(1.0)),
           repeatingSubitem: pairItem,
           count: 2)
-
-        // 1
+        
         let mainWithPairGroup = NSCollectionLayoutGroup.horizontal(
           layoutSize: NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),

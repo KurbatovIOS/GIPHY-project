@@ -95,6 +95,7 @@ class TrendingViewController: UIViewController {
             gifTabButton.configuration?.baseBackgroundColor = .purple
             
             currentTab = .gif
+            itemCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             itemCollectionView.reloadData()
         }
     }
@@ -107,6 +108,7 @@ class TrendingViewController: UIViewController {
             stickerTabButton.configuration?.baseBackgroundColor = .purple
             
             currentTab = .sticker
+            itemCollectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
             itemCollectionView.reloadData()
         }
     }
@@ -122,7 +124,13 @@ extension TrendingViewController: UICollectionViewDelegate, UICollectionViewData
         guard let cell = itemCollectionView.dequeueReusableCell(withReuseIdentifier: Helpers.shared.cellIdentifier, for: indexPath) as? ItemCollectionViewCell else {
             return UICollectionViewCell()
         }
-        currentTab == .gif ? cell.configureCell(using: gifs[indexPath.row], isSticker: false) :  cell.configureCell(using: stickers[indexPath.row], isSticker: true)
+        
+        if currentTab == .gif {
+            cell.configureCell(using: gifs[indexPath.row], isSticker: false)
+        }
+        else {
+            cell.configureCell(using: stickers[indexPath.row], isSticker: true)
+        }
         
         return cell
     }

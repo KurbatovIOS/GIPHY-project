@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 import Photos
+import SnapKit
 
 class SharePresenter {
-    
     
     func createCopyButton(color: UIColor, title: String) -> UIButton {
         
@@ -19,6 +19,10 @@ class SharePresenter {
         button.backgroundColor = color
         button.setTitle(title, for: .normal)
         button.tintColor = .white
+        
+        button.snp.makeConstraints { make in
+            make.height.equalTo(40)
+        }
         
         return button
     }
@@ -45,7 +49,7 @@ class SharePresenter {
                 })
                 
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Saved!", message: "GIF has been saved to your photos", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Saved!", message: "Picture has been saved to your photos", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default))
                     sender.present(alert, animated: true)
                 }
@@ -96,6 +100,7 @@ class SharePresenter {
         return appURL
     }
     
+    // Custom alert fading animation
     func animation(view: UIView) {
         
         UIView.animate(withDuration: 0.5) {

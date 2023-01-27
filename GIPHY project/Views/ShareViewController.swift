@@ -64,6 +64,7 @@ class ShareViewController: UIViewController {
         dismissButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
             make.leading.equalToSuperview().offset(15)
+            make.height.width.equalTo(40)
         }
     }
     
@@ -79,6 +80,7 @@ class ShareViewController: UIViewController {
         shareButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(15)
             make.trailing.equalToSuperview().offset(-15)
+            make.height.width.equalTo(40)
         }
     }
     
