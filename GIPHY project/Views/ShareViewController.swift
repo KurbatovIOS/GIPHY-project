@@ -26,6 +26,7 @@ class ShareViewController: UIViewController {
     
     var url: String!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -146,52 +147,28 @@ class ShareViewController: UIViewController {
         
         view.addSubview(socialStack)
         
-        for i in 0..<7 {
-            let image = UIImageView()
-            var imageName = ""
-            switch i {
-            case 0:
-                imageName = "imessage"
-            case 1:
-                imageName = "messenger"
-            case 2:
-                imageName = "snapchat"
-            case 3:
-                imageName = "whatsapp"
-            case 4:
-                imageName = "instagram"
-            case 5:
-                imageName = "facebook"
-            case 6:
-                imageName = "twitter"
-            default:
-                imageName = "imessage"
-            }
-            image.image = UIImage(named: imageName)
-            socialStack.addArrangedSubview(image)
+        for i in 0..<3 {
+            let socialImageView = presenter.createSocialImageView(index: i)
+            socialImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sendMessage)))
+            socialStack.addArrangedSubview(socialImageView)
         }
         socialStack.axis = .horizontal
+        socialStack.alignment = .trailing
         socialStack.distribution = .equalSpacing
         
         socialStack.snp.makeConstraints { make in
             make.bottom.equalTo(copyLinkButton.snp.top).offset(-5)
-            make.leading.equalToSuperview().offset(15)
+            make.leading.equalTo(view.snp.centerX)
             make.trailing.equalToSuperview().offset(-15)
             make.height.equalTo(40)
         }
     }
-    
-    
     
     // MARK: - Button actions
     
     @objc private func copyLink() {
         
         UIPasteboard.general.string = url
-    }
-    
-    private func save() {
-        
     }
     
     @objc private func dismissAction() {
@@ -201,31 +178,27 @@ class ShareViewController: UIViewController {
     
     @objc private func shareButtonTap() {
         
-        if let gifUrl = URL(string: url) {
-            let session = URLSession.shared
-            let dataTask = session.dataTask(with: gifUrl) { (data, response, error) in
-                
-                guard data != nil && error == nil else { return }
-                
-                PHPhotoLibrary.shared().performChanges({
-                    let creationRequest = PHAssetCreationRequest.forAsset()
-                    creationRequest.addResource(with: .photo, data: data!, options: nil)
-                })
-            }
-            dataTask.resume()
-        }
+        presenter.saveGIF(urlString: url, sender: self)
     }
     
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            // we got back an error!
-            let alert = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
-        } else {
-            let alert = UIAlertController(title: "Saved!", message: "The GIF has been saved to your photos.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
+    @objc private func sendMessage(tapGestureRecognizer: UITapGestureRecognizer) {
+        
+        let socialView = tapGestureRecognizer.view as! UIImageView
+        
+        let appURL = presenter.getAppURL(index: socialView.tag)
+        
+        let queryCharSet = NSCharacterSet.urlQueryAllowed
+
+        if let message = url.addingPercentEncoding(withAllowedCharacters: queryCharSet) {
+            if let finalURL = URL(string: appURL + message) {
+                if UIApplication.shared.canOpenURL(finalURL) {
+                    UIApplication.shared.open(finalURL, options: [: ], completionHandler: nil)
+                } else {
+                    let alert = UIAlertController(title: "Oops...", message: "Coudn't launch application", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                    present(alert, animated: true)
+                }
+            }
         }
     }
 }
