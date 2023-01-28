@@ -167,7 +167,7 @@ class UIConfigurator {
     
     // MARK: - Custom alert fading animation
     
-    func animation(view: UIView) {
+    func addFadinganimation(to view: UIView) {
         
         UIView.animate(withDuration: 0.5) {
             view.alpha = 1

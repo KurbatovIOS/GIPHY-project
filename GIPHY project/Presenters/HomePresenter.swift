@@ -43,24 +43,25 @@ class HomePresenter {
         
         let dataTask = session.dataTask(with: url) { data, urlResponse, error in
             
-            guard data != nil && error == nil else { return }
+            guard error == nil else { return }
             
             do {
-                let data = try JSONDecoder().decode(Response.self, from: data!).data
-                
-                var items = [Images]()
-                
-                for item in data {
-                    items.append(item.images)
-                }
-                
-                DispatchQueue.main.async {
+                if let data = data {
+                    let imageData = try JSONDecoder().decode(Response.self, from: data).data
                     
-                    if isSticker {
-                        self.stickerDelegate?.stickerRetrieved(items)
+                    var items = [Images]()
+                    
+                    for item in imageData {
+                        items.append(item.images)
                     }
-                    else {
-                        self.gifDelegate?.gifRetrieved(items)
+                    
+                    DispatchQueue.main.async {
+                        if isSticker {
+                            self.stickerDelegate?.stickerRetrieved(items)
+                        }
+                        else {
+                            self.gifDelegate?.gifRetrieved(items)
+                        }
                     }
                 }
             }

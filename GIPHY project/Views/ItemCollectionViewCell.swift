@@ -10,7 +10,6 @@ import SDWebImage
 
 final class ItemCollectionViewCell: UICollectionViewCell {
     
-    private let itemImageView = UIImageView()
     private let imageView = SDAnimatedImageView()
     private let colors: [UIColor] = [.cyan, .systemPurple]
     

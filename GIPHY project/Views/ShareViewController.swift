@@ -214,7 +214,7 @@ class ShareViewController: UIViewController {
     @objc private func copyLink() {
         
         UIPasteboard.general.string = url
-        configurator.animation(view: customAlertView)
+        configurator.addFadinganimation(to: customAlertView)
     }
     
     @objc private func copyGIF() {
@@ -228,7 +228,7 @@ class ShareViewController: UIViewController {
                 UIPasteboard.general.setData(data!, forPasteboardType: "com.compuserve.gif")
                 
                 DispatchQueue.main.async {
-                    self.configurator.animation(view: self.customAlertView)
+                    self.configurator.addFadinganimation(to: self.customAlertView)
                 }
             }
             dataTask.resume()
